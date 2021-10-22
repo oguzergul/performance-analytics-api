@@ -1,14 +1,13 @@
-const express = require('express');
+const app = require('express')();
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const app = express();
 
 const dbConfig = require('./config/database.config');
 const mongoose = require('mongoose');
 
 app.use(cors());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
 
 
 mongoose.Promise = global.Promise;
@@ -26,6 +25,6 @@ mongoose.connect(dbConfig.url, {
 require('./app/routes/analytics.routes.js')(app);
 
 // listen for requests
-app.listen(8080, () => {
+app.listen(process.env.PORT || 8080, () => {
     console.log("Server is listening on port 3000");
 });
