@@ -1,7 +1,6 @@
 const Analytics = require('../models/analytics.model.js');
 
 exports.create = (req, res) => {
-    // Validate request
     if (!req.body.url) {
         return res.status(400).send({
             message: "Body content can not be empty"
