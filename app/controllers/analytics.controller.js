@@ -2,7 +2,6 @@ const Analytics = require('../models/analytics.model.js');
 
 exports.create = (req, res) => {
     // Validate request
-
     if (!req.body.url) {
         return res.status(400).send({
             message: "Body content can not be empty"
@@ -21,37 +20,18 @@ exports.create = (req, res) => {
     });
 };
 
-// Retrieve and return all notes from the database.
+// Retrieve and return last 30 minutes analytics from the database.
 exports.findAll = (req, res) => {
-    console.log(req, res);
-    Analytics.find()
-        .then(notes => {
-            res.send(notes);
-        }).catch(err => {
+    Analytics.find().then(data => {
+        res.send(data);
+    }).catch(err => {
         res.status(500).send({
-            message: err.message || "Some error occurred while retrieving notes."
+            message: err.message || "Some error occurred while retrieving analytics."
         });
     });
 };
 
-exports.findReports = (req, res) => {
-    console.log('req', req);
-    console.log('res', res);
-    // const timeRangeMin = () => {
-    //     if (req.query.min) {
-    //         return new Date(req.min).toString()
-    //     }
-    //
-    //     const date = new Date()
-    //     return date.setMinutes(date.getMinutes() - 30).toString()
-    // }
-    // const timeRangeMax = () => {
-    //     if (req.max) {
-    //         return new Date(req.max).toString()
-    //     }
-    //
-    //     return new Date().toString()
-    // }
+exports.findAnalytic = (req, res) => {
     const timeRangeMin = () => {
         if (req.query.min) {
             return new Date(req.query.min).toString()

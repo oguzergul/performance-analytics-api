@@ -1,10 +1,12 @@
 module.exports = (app) => {
-    const notes = require('../controllers/analytics.controller.js');
+    const analytics = require('../controllers/analytics.controller.js');
 
     // Save Analytics
-    app.post('/notes', notes.create);
+    app.post('/analytics', analytics.create);
 
     // Get All Analytics
-    app.get('/notes', notes.findAll);
-    app.get('/single-note', notes.findReports);
+    app.get('/analytics', analytics.findAll);
+
+    // GET Specific Dates Analytic Data
+    app.get('/find-analytic', analytics.findAnalytic);
 }
