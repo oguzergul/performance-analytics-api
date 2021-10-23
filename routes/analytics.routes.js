@@ -1,5 +1,6 @@
 const analytics = require('../controllers/analytics.controller');
 
+
 module.exports = (app) => {
     // Save Analytics
     app.post('/analytics', analytics.create);
@@ -9,4 +10,6 @@ module.exports = (app) => {
 
     // GET Specific Dates Analytic Data
     app.get('/find-analytic', analytics.findAnalytic);
+
+    app.get('/', analytics.getLastHalfHour)
 }

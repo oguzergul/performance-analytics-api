@@ -47,6 +47,24 @@ findAnalytic = (req, res) => {
         return new Date().toString()
     }
     Analytics.find({measurement_date: {$gte: timeRangeMin(), $lte: timeRangeMax()}})
-        .then((metrics) => res.send(metrics))
+        .then((metrics) => res.send(metrics)).catch(err => {
+        res.send({
+            status: err.status,
+            message: err.message || "Some error occured "
+        })
+    })
 };
-module.exports = {create, findAll, findAnalytic}
+
+
+getLastHalfHour = (req, res) => {
+    console.log(new Date(new Date().getTime() - 1000 * 60 * 30))
+    Analytics.find({ measurement_date: { $gte: new Date().getTime() - 1000 * 60 * 30}
+    }).then((metrics) => res.send(metrics)).catch(err => {
+        res.send({
+            status: err.status,
+            message: err.message
+        })
+    })
+}
+
+module.exports = {create, findAll, findAnalytic, getLastHalfHour}
