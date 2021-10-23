@@ -1,6 +1,6 @@
 const Analytics = require('../models/analytics.model.js');
 
-exports.create = (req, res) => {
+create = (req, res) => {
     if (!req.body.url) {
         return res.status(400).send({
             message: "Body content can not be empty"
@@ -20,7 +20,7 @@ exports.create = (req, res) => {
 };
 
 // Retrieve and return last 30 minutes analytics from the database.
-exports.findAll = (req, res) => {
+findAll = (req, res) => {
     Analytics.find().then(data => {
         res.send(data);
     }).catch(err => {
@@ -30,7 +30,7 @@ exports.findAll = (req, res) => {
     });
 };
 
-exports.findAnalytic = (req, res) => {
+findAnalytic = (req, res) => {
     const timeRangeMin = () => {
         if (req.query.min) {
             return new Date(req.query.min).toString()
@@ -49,4 +49,4 @@ exports.findAnalytic = (req, res) => {
     Analytics.find({measurement_date: {$gte: timeRangeMin(), $lte: timeRangeMax()}})
         .then((metrics) => res.send(metrics))
 };
-
+module.exports = {create, findAll, findAnalytic}

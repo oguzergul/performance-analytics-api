@@ -1,6 +1,6 @@
-module.exports = (app) => {
-    const analytics = require('../controllers/analytics.controller.js');
+const analytics = require('../controllers/analytics.controller');
 
+module.exports = (app) => {
     // Save Analytics
     app.post('/analytics', analytics.create);
 
