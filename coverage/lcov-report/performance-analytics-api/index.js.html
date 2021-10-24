@@ -15,41 +15,41 @@
         }
     </style>
 </head>
-    
+
 <body>
 <div class='wrapper'>
     <div class='pad1'>
         <h1><a href="../index.html">All files</a> / <a href="index.html">performance-analytics-api</a> index.js</h1>
         <div class='clearfix'>
-            
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">72.22% </span>
                 <span class="quiet">Statements</span>
                 <span class='fraction'>13/18</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
                 <span class='fraction'>2/2</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
                 <span class='fraction'>0/4</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">72.22% </span>
                 <span class="quiet">Lines</span>
                 <span class='fraction'>13/18</span>
             </div>
-        
-            
+
+
         </div>
         <p class="quiet">
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
@@ -121,22 +121,22 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const app = express();
+const index = express();
 &nbsp;
 const dbConfig = require('./config/database.config');
 const PORT = process.env.PORT || 3000;
 &nbsp;
 const db = mongoose.connection;
 &nbsp;
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}))
-app.use(cors());
+index.use(bodyParser.json());
+index.use(bodyParser.urlencoded({extended: true}))
+index.use(cors());
 &nbsp;
 db.once("open", <span class="fstat-no" title="function not covered" >()</span> =&gt; {
-<span class="cstat-no" title="statement not covered" >    require("./routes/analytics.routes")(app)</span>
+<span class="cstat-no" title="statement not covered" >    require("./routes/analytics.routes")(index)</span>
 })
 &nbsp;
-app.listen(PORT, <span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {
+index.listen(PORT, <span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {
 <span class="cstat-no" title="statement not covered" >    console.log(`Server is working on ${PORT}. Database connection process started`);</span>
 <span class="cstat-no" title="statement not covered" >    await mongoose.connect(dbConfig.url, {</span>
         useNewUrlParser: true,
@@ -167,4 +167,3 @@ app.listen(PORT, <span class="fstat-no" title="function not covered" >as</span>y
         <script src="../block-navigation.js"></script>
     </body>
 </html>
-    

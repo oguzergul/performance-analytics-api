@@ -2,7 +2,7 @@ const request = require("supertest");
 const mongoose = require('mongoose');
 const dbConfig = require('../config/database.config');
 
-const PORT = process.env.PORT || 'http://localhost:3000';
+const PORT = process.env.PORT || "http://localhost:3000";
 
 beforeEach((done) => {
     mongoose.connect(dbConfig.url,
@@ -27,7 +27,7 @@ const mockReport = {
 
 describe('Analytics API', () => {
     it('should get all data from api', async () => {
-        const response = await request(PORT).get('/analytics');
+        const response = await request(PORT).get('/performance');
         expect(response.status).toEqual(200)
         expect(Array.isArray(response.body)).toBeTruthy();
     });
@@ -40,7 +40,7 @@ describe('Analytics API', () => {
     });
 
     it('should get specific dates data from api', async () => {
-        const response = await request(PORT).get(`/find-analytic/?min=2021-10-01T17:31&max=2021-10-23T17:31`);
+        const response = await request(PORT).get(`/performance/?min=2021-10-01T17:31&max=2021-10-23T17:31`);
         expect(response.status).toEqual(200);
         expect(Array.isArray(response.body)).toBeTruthy()
     });
