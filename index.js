@@ -1,29 +1,22 @@
-const mongoose = require('mongoose');
-const app = require('express')();
-const bodyParser = require('body-parser');
+const express = require('express');
+const helmet = require('helmet');
 const cors = require('cors');
+const config = require('./config');
+const loaders = require("./loaders");
 
-const dbConfig = require('./config/database.config');
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000
 
-const db = mongoose.connection;
+const {PerformanceRoutes} = require("./routes");
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}))
+config();
+loaders();
+
+const app = express();
+app.use(express.json());
+app.use(helmet());
 app.use(cors());
 
-db.once("open", () => {
-    require("./routes/analytics.routes")(app)
-})
-
-app.listen(PORT, async () => {
+app.listen(PORT, () => {
     console.log(`Server is working on ${PORT}. Database connection process started`);
-    await mongoose.connect(dbConfig.url, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    }).then(() => {
-        console.log("Successfully connected to the database");
-    }).catch((err) => {
-        console.log("Could not connect to the database. Exiting now...", err)
-    });
+    app.use("/", PerformanceRoutes.router);
 });

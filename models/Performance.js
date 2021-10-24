@@ -1,6 +1,7 @@
-const mongoose = require('mongoose');
+const Mongoose = require('mongoose');
 
-const AnalyticSchema = mongoose.Schema({
+
+const PerformanceSchema = Mongoose.Schema({
     files: {
         type: Array,
     },
@@ -37,7 +38,9 @@ const AnalyticSchema = mongoose.Schema({
         required: true
     },
 }, {
+    versionKey: false,
     timestamps: true
 });
 
-module.exports = mongoose.model('Analytics', AnalyticSchema);
+
+module.exports = Mongoose.model("Performance", PerformanceSchema);
