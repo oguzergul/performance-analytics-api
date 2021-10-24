@@ -7,20 +7,19 @@ const savePerformanceMetrics = (performanceData) => {
 }
 
 const servePerformanceMetrics = () => {
-    return PerformanceModel.find({});
+    return PerformanceModel.find();
 }
 
 const serveSelectedDateMetrics = (req) => {
     const startDate = dateValidator(req.query.min);
     const endDate = dateValidator(req.query.max);
-    console.log('start', startDate);
-    console.log('end', endDate);
 
     return PerformanceModel.find({measurement_date: {$gte: startDate, $lte: endDate}})
 }
 
 const serveLastHalfHoursMetrics = () => {
-    return PerformanceModel.find({measurement_date: {$gte: new Date().getTime() - 1000 * 60 * 30}});
+    const halfHourAgo = new Date().getTime() - 1000 * 60 * 30
+    return PerformanceModel.find({measurement_date: {$gte: halfHourAgo}});
 }
 
 module.exports = {
