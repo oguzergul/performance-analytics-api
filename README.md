@@ -35,6 +35,14 @@ MONGO_DB_USERNAME= ...
 MONGO_DB_PASSWORD= ...
 MONGO_DB_DATABASE= ...
 ```
+
+### Docker
+To run this project using Docker
+```
+// run this command (.env required for db)
+
+$ docker-compose up
+```
 ### Benchmarking
 autocannon load tests made and RPS > 200 <br>
 Run this command on terminal
