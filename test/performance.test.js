@@ -28,11 +28,13 @@ describe('Analytics API', () => {
 
     it('should get all data from api', async () => {
         const response = await request(PORT).get('/performance');
+
         expect(response?.status).toEqual(200);
         expect(Array.isArray(response?.body)).toBeTruthy();
     });
 
     it('should return last 30 minutes data', async () => {
+
         const response = await request(PORT).get('/');
         const data = response?.body?.slice(-1)[0]?.measurement_date;
         const minDate = new Date(new Date().getTime() - 1000 * 60 * 30);
@@ -40,8 +42,8 @@ describe('Analytics API', () => {
         if (response.body.length) {
             expect(new Date(data) > new Date(minDate)).toEqual(true);
         }
-        expect(Array.isArray(response?.body)).toBeTruthy()
 
+        expect(Array.isArray(response?.body)).toBeTruthy();
     });
 
     it('should get specific dates data from api', async () => {
@@ -55,8 +57,9 @@ describe('Analytics API', () => {
 
     it('should create new performance record', async () => {
         const response = await request(PORT).post('/performance').send(mockReport);
-        console.log('Response', response);
+
         expect(response.status).toEqual(201);
+        expect(typeof response.body).toEqual("object");
     });
 
     it('should send status:500 when invalid req', async () => {
